@@ -11,53 +11,79 @@
     
     <header id="torre-solar">
         <h1>A Dama do Pôr do Sol</h1>
-        <p class="narrativa-admirador">Observações de um Admirador</p>
+        <p class="narrativa-admirador">A lenda descrita por um Admirador</p>
     </header>
 
-    <main class="container-cards">
+    <main class="main-content">
         
-        <section class="card biografia-card">
-            <h2>Primeiras Observações da Lenda</h2>
+        <section class="card lenda-card">
+            <h2></h2>
+            
             <p class="narrativa-admirador">
-                É uma visão rara. Ninguém sabe seu nome verdadeiro, nem a origem de seu reino. Para os poucos dignos, ela é simplesmente <strong>A Dama do Pôr do Sol</strong>, a guardiã das transições e da luz perfeita.
+                É uma visão mágica. Ninguém sabe seu nome verdadeiro, nem sua origem. Para aqueles que a observam, ela é simplesmente <strong>A Dama do Pôr do Sol</strong>.
             </p>
+
             <p class="narrativa-admirador">
-                Sua morada não está em um mapa. É uma **Torre Solar**, uma estrutura de cristal e névoa que só se manifesta no ponto exato em que o sol toca o horizonte e a primeira luz da lua se acende. É no alto desta torre que ela é vista, observando o mundo com uma aura de poder sereno e inabalável.
+                Sua morada não está em um mapa. Ela é vista em uma Torre, uma estrutura localizada em um vasto jardim cheio de vida e beleza. É no alto desta torre que ela é vista, observando tanto o pôr do sol, como a luz da lua com sua Aura forte e ao mesmo tempo delicada.
             </p>
+
             <p class="narrativa-admirador">
-                Ela é a senhora do seu próprio destino. E o mais cativante: por onde passa, com sua alegria simples e contagiante, ela cativa e encanta, deixando para trás um rastro de luz pura e felicidade renovada.
+                Ela é a senhora do seu próprio destino. Há quem pense que ela fica aprisionada em sua torre, mas sempre que quer, ela viaja pelo mundo em busca de algo novo. Por onde passa, com sua alegria simples e contagiante, ela cativa e encanta, deixando para trás um rastro de luz pura e felicidade renovada.
+            </p>
+
+            <p class="narrativa-admirador">
+                Aqueles que a encontram são tocados por uma magia especial, uma bênção que os transforma para sempre. E é por isso que eu a observo, esperando um dia ser digno de sua atenção.
             </p>
         </section>
 
-        <section class="card poderes-card">
-            <h2>Os Poderes Revelados</h2>
-            <p class="narrativa-admirador">Três Lendas Sussurradas:</p>
+        <section class="poderes-container">
+            <h2>Suas Habilidades</h2>
+            
 
-            <div class="lista-poderes">
+            <div class="cards-poderes-wrapper">
                 
-                <div class="poder-item" onclick="revelarElogio(this)">
-                    <h3>O Portal do Horizonte</h3>
-                    <p class="descricao-publica">A habilidade que a mantém em movimento. Ativado por seu desejo incontrolável de ver o novo, transporta-a instantaneamente entre montanhas, oceanos e cidades.</p>
-                    <p class="elogio-secreto">
-                        <strong>[ELOGIO]</strong>: "Este poder é a tradução mágica da sua alma curiosa e aventureira, que não se contenta com fronteiras. Você me inspira a buscar o horizonte também."
-                    </p>
+                <div class="card-flip-container" onclick="flipCard(this)">
+                    <div class="card-flip-inner">
+                        <div class="card-flip-front card">
+                            <h3>O Portal do Horizonte</h3>
+                            <p class="descricao-publica">A habilidade que a mantém em movimento. Ativado por seu desejo incontrolável de ver o novo, transporta-a instantaneamente entre montanhas, oceanos e cidades.</p>
+                        </div>
+                        <div class="card-flip-back card">
+                            <p class="elogio-secreto">
+                                <strong>Descrição</strong>: "Este poder é a tradução mágica da sua alma curiosa e aventureira, que não se contenta com fronteiras. Você me inspira a buscar o horizonte também."
+                            </p>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="poder-item" onclick="revelarElogio(this)">
-                    <h3>O Brilho da Simplicidade</h3>
-                    <p class="descricao-publica">Sua magia passiva. Sua beleza e graça não vêm de encantamentos complexos, mas da alegria e autenticidade que irradia. Dissipa a inveja e atrai a paz.</p>
-                    <p class="elogio-secreto">
-                        <strong>[ELOGIO]</strong>: "Seu sorriso é o verdadeiro feitiço. É uma luz tão genuína que desarma qualquer sombra, tornando o mundo um lugar muito mais feliz."
-                    </p>
+                <div class="card-flip-container" onclick="flipCard(this)">
+                    <div class="card-flip-inner">
+                        <div class="card-flip-front card">
+                            <h3>O Brilho da Simplicidade</h3>
+                            <p class="descricao-publica">Sua magia passiva. Sua beleza e graça não vêm de encantamentos complexos, mas da alegria e autenticidade que irradia. Dissipa a inveja e atrai a paz.</p>
+                        </div>
+                        <div class="card-flip-back card">
+                            <p class="elogio-secreto">
+                                <strong>Descrição</strong>: "Seu sorriso é o verdadeiro feitiço. É uma luz tão genuína que desarma qualquer sombra, tornando o mundo um lugar muito mais feliz."
+                            </p>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="poder-item" onclick="revelarElogio(this)">
-                    <h3>A Força da Luz Poente</h3>
-                    <p class="descricao-publica">Sua característica mais poderosa: a aura inabalável de sua presença. Impõe respeito sem precisar de palavras e é a fonte de sua independência.</p>
-                    <p class="elogio-secreto">
-                        <strong>[ELOGIO]</strong>: "Sua capacidade de se bastar é a sua coroa. Você é uma força da natureza, e essa autossuficiência é a característica que mais admiro e respeito em você."
-                    </p>
+                <div class="card-flip-container" onclick="flipCard(this)">
+                    <div class="card-flip-inner">
+                        <div class="card-flip-front card">
+                            <h3>A Força da Luz Poente</h3>
+                            <p class="descricao-publica">Sua característica mais poderosa: a aura inabalável de sua presença. Impõe respeito sem precisar de palavras e é a fonte de sua independência.</p>
+                        </div>
+                        <div class="card-flip-back card">
+                            <p class="elogio-secreto">
+                                <strong>Descrição</strong>: "Sua capacidade de se bastar é a sua coroa. Você é uma força da natureza, e essa autossuficiência é a característica que mais admiro e respeito em você."
+                            </p>
+                        </div>
+                    </div>
                 </div>
+
             </div>
         </section>
         
@@ -79,7 +105,7 @@
     </main>
     
     <footer>
-        <p>&copy; Observatório do Admirador Secreto</p>
+        <p>&copy; Observatório do Admirador não tão Secreto</p>
     </footer>
 
     <script src="script.js"></script>

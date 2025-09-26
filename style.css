@@ -10,176 +10,328 @@
 
 body {
     min-height: 100vh;
-    font-family: 'Lora', serif; /* Fonte para textos longos */
-    transition: background 2s ease-in-out, color 1.5s ease; /* Suaviza a mudança de tema */
+    font-family: 'Lora', serif;
+    transition: background 2s ease-in-out, color 1.5s ease;
+    line-height: 1.6; /* Melhor legibilidade */
 }
 
 h1, h2, h3 {
-    font-family: 'Cinzel', serif; /* Fonte épica para títulos */
+    font-family: 'Cinzel', serif;
     text-align: center;
     margin-bottom: 10px;
+    color: inherit; /* Títulos herdam a cor do body para o tema */
+}
+
+/* Header (Topo da página) */
+#torre-solar {
+    text-align: center; 
+    padding: 40px 20px 20px 20px;
+}
+
+#torre-solar h1 {
+    font-size: 2.8em; 
+    margin-bottom: 5px;
 }
 
 .narrativa-admirador {
     font-style: italic;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
+    opacity: 0.9;
 }
 
-/* Container de Cards */
-.container-cards {
+/* Container principal para centralizar o conteúdo */
+.main-content {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-direction: column; /* Organiza as seções verticalmente */
+    align-items: center; /* Centraliza as seções */
     padding: 20px;
-    max-width: 1200px;
+    max-width: 1400px; /* Largura máxima para a página */
     margin: 0 auto;
 }
 
-/* Estilo do Card Básico */
+/* Estilo do Card Básico (aplicado a frente e verso dos cards rotacionáveis e aos outros) */
 .card {
     border-radius: 10px;
-    padding: 20px;
-    margin: 20px;
-    flex: 1 1 300px; /* Flexbox: Cresce e diminui, com base mínima de 300px */
-    min-height: 300px;
-    transition: all 1s ease; /* Transição para o card também mudar suavemente */
+    padding: 25px;
+    margin: 15px; /* Margem entre os cards */
+    background-color: rgba(0, 0, 0, 0.8); /* Fundo padrão para cards */
+    border: 1px solid gold; /* Borda padrão */
+    box-shadow: 0 0 15px gold; /* Sombra padrão */
+    transition: all 1s ease, background-color 0.5s, border-color 0.5s, box-shadow 0.5s; /* Suaviza transições */
+    text-align: justify; /* Justifica o texto dentro dos cards */
 }
 
-/* Estilo para os Itens de Poder Clicáveis */
-.poder-item {
-    border-radius: 5px;
-    padding: 15px;
-    margin-bottom: 15px;
+/* Card da Lenda (o card grande no topo) */
+.lenda-card {
+    width: 90%; /* Ocupa quase toda a largura */
+    max-width: 900px; /* Largura máxima */
+    min-height: 250px;
+    margin-bottom: 30px; /* Mais espaço antes dos cards de poder */
+}
+
+/* Container dos 3 cards de Poder (lado a lado) */
+.poderes-container {
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.poderes-container h2, .poderes-container .narrativa-admirador {
+    margin-left: 15px; /* Ajusta o alinhamento para ficar com a mesma margem dos cards */
+    margin-right: 15px;
+}
+
+.cards-poderes-wrapper {
+    display: flex;
+    flex-wrap: wrap; /* Permite que os cards quebrem a linha em telas menores */
+    justify-content: center; /* Centraliza os cards */
+    gap: 30px; /* Espaço entre os cards */
+    padding: 0 15px; /* Preenchimento lateral */
+}
+
+
+/* --- CSS PARA O EFEITO DE ROTAÇÃO 3D (FLIP CARD) --- */
+
+.card-flip-container {
+    background-color: transparent;
+    width: 300px; /* Largura fixa para os cards de poder */
+    height: 400px; /* Altura fixa para os cards de poder */
+    perspective: 1000px; /* Dá a sensação de profundidade 3D */
     cursor: pointer;
-    overflow: hidden;
-    transition: background-color 0.3s, box-shadow 0.3s;
+    flex-shrink: 0; /* Impede que os cards diminuam se não houver espaço */
 }
 
-.poder-item:hover {
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5); /* Efeito de brilho ao passar o mouse */
+.card-flip-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s; /* Tempo da animação de rotação */
+    transform-style: preserve-3d; /* Permite a rotação dos elementos filhos */
 }
 
-/* Estilo para a revelação suave do Elogio Secreto */
-.elogio-secreto {
-    max-height: 0;
-    opacity: 0;
-    padding-top: 0;
-    color: gold; /* Cor especial para o segredo */
-    transition: max-height 0.8s ease-out, opacity 0.8s ease-out, padding-top 0.8s ease-out;
+/* Estado quando o card é 'virado' */
+.card-flip-container.flipped .card-flip-inner {
+    transform: rotateY(180deg);
 }
 
-/* Classe adicionada pelo JS para revelar */
-.elogio-secreto.revelado {
-    max-height: 200px; 
+.card-flip-front, .card-flip-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden; /* Esconde o verso ao girar */
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centraliza o conteúdo verticalmente */
+    align-items: center;
+    text-align: center;
+    padding: 25px; /* Ajuste o padding para o conteúdo caber bem */
+}
+
+.card-flip-front {
+    /* O lado da frente usa o estilo .card padrão */
+    z-index: 2;
+}
+
+.card-flip-back {
+    transform: rotateY(180deg); /* Vira o verso para o outro lado */
+    /* O lado de trás usa o estilo .card padrão, mas pode ter cores diferentes */
+    background-color: rgba(25, 25, 112, 0.9); /* Cor mais escura para o verso */
+    border-color: #E0FFFF; /* Borda de cor de lua */
+    box-shadow: 0 0 15px #E0FFFF;
+}
+
+.card-flip-back .elogio-secreto {
+    /* O elogio secreto é sempre visível no verso do card */
+    max-height: none; /* Desativa o max-height:0 padrão do elogio-secreto */
     opacity: 1;
-    padding-top: 10px;
+    padding-top: 0;
+    color: #E0FFFF; /* Cor para o elogio no verso */
+    font-style: italic;
+}
+
+
+/* Card do Mistério do Nome */
+.misterio-card {
+    width: 90%;
+    max-width: 600px; /* Um pouco menor para dar destaque ao mistério */
+    text-align: center;
+    margin-top: 30px;
 }
 
 /* Campo Secreto e Botão */
 .campo-secreto {
-    text-align: center;
-    padding: 20px;
+    padding: 20px 0;
     border-top: 1px solid rgba(255, 255, 255, 0.3);
+    margin-top: 20px;
 }
 
 #nome-input {
-    padding: 10px;
-    margin: 10px 0;
+    padding: 12px;
+    margin: 15px 0;
     width: 80%;
     max-width: 300px;
-    border-radius: 5px;
-    border: none;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #333;
+    font-size: 1em;
 }
 
 button {
-    padding: 10px 20px;
+    padding: 12px 25px;
     cursor: pointer;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     font-weight: bold;
+    font-family: 'Cinzel', serif;
+    font-size: 1em;
+    transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
 }
 
+button:hover {
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+
 #mensagem-final {
-    margin-top: 15px;
-    font-size: 1.2em;
+    margin-top: 20px;
+    font-size: 1.3em;
     font-weight: bold;
+    /* Usa a mesma transição do elogio para aparecer suavemente */
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    padding-top: 0;
+    transition: max-height 0.8s ease-out, opacity 0.8s ease-out, padding-top 0.8s ease-out;
+}
+
+/* Classe para revelar a mensagem final */
+#mensagem-final.revelado {
+    max-height: 200px; /* Suficiente para a mensagem */
+    opacity: 1;
+    padding-top: 15px;
 }
 
 footer {
     text-align: center;
-    padding: 10px;
-    font-size: 0.8em;
-    opacity: 0.7;
+    padding: 20px;
+    font-size: 0.9em;
+    opacity: 0.8;
+    margin-top: 40px; /* Mais espaço do conteúdo */
 }
 
-/* --- TEMA 1: NOITE (Padrão e Escuro) --- */
-/* (Este é o tema que será aplicado das 19h às 05h59) */
+/* --- TEMAS DINÂMICOS --- */
+
+/* TEMA PADRÃO: NOITE (Aplicado das 19h às 05h59) */
 body.tema-noite {
-    background: linear-gradient(to bottom, #000000, #191970);
-    color: #E0FFFF; /* Brilho da lua */
+    background: linear-gradient(to bottom, #000000, #191970); /* Preto para Azul Escuro */
+    color: #E0FFFF; /* Ciano claro (cor da lua) */
 }
 
 body.tema-noite .card {
     background-color: rgba(0, 0, 0, 0.8);
-    border: 1px solid #7B68EE; /* Azul Violeta Místico */
+    border-color: #7B68EE; /* Azul Violeta Místico */
     box-shadow: 0 0 15px #7B68EE;
+}
+
+body.tema-noite .card-flip-back { /* O verso do card de poder na noite */
+    background-color: rgba(25, 25, 112, 0.95);
+    border-color: #E0FFFF;
+    box-shadow: 0 0 15px #E0FFFF;
 }
 
 body.tema-noite button {
     background-color: #7B68EE;
     color: white;
 }
+body.tema-noite button:hover {
+    box-shadow: 0 0 10px #E0FFFF;
+}
 
-/* --- TEMA 2: PÔR DO SOL --- */
-/* (Aplicado das 17h às 18h59) */
+
+/* TEMA PÔR DO SOL (Aplicado das 17h às 18h59) */
 body.tema-por-do-sol {
     background: linear-gradient(to bottom, #FF8C00, #800080); /* Laranja forte para Roxo */
-    color: #F8F8FF;
+    color: #F8F8FF; /* Branco fantasma */
 }
 
 body.tema-por-do-sol .card {
     background-color: rgba(0, 0, 0, 0.7);
-    border: 1px solid gold;
+    border-color: gold;
     box-shadow: 0 0 15px gold;
+}
+
+body.tema-por-do-sol .card-flip-back { /* O verso do card de poder no pôr do sol */
+    background-color: rgba(128, 0, 128, 0.9); /* Roxo mais escuro */
+    border-color: #FFD700; /* Ouro */
+    box-shadow: 0 0 15px #FFD700;
 }
 
 body.tema-por-do-sol button {
     background-color: gold;
     color: black;
 }
-
-/* --- TEMA 3: DIA --- */
-/* (Aplicado das 06h às 16h59) */
-body.tema-dia {
-    background: linear-gradient(to top, #87CEEB, #FFFFFF); /* Céu claro */
-    color: #333333;
+body.tema-por-do-sol button:hover {
+    box-shadow: 0 0 10px #FFD700;
 }
 
-body.tema-dia .card {
-    background-color: rgba(255, 255, 255, 0.9);
-    border: 1px solid #00BFFF; /* Azul vibrante */
-    box-shadow: 0 0 10px #00BFFF;
+
+/* TEMA DIA (Aplicado das 06h às 16h59) */
+body.tema-dia {
+    background: linear-gradient(to top, #87CEEB, #FFFFFF); /* Céu claro para branco */
+    color: #333333; /* Texto escuro */
 }
 
 body.tema-dia h1, body.tema-dia h2, body.tema-dia h3 {
-    color: #0056b3; /* Títulos escuros */
+    color: #0056b3; /* Títulos em azul escuro */
+}
+
+body.tema-dia .card {
+    background-color: rgba(255, 255, 255, 0.95);
+    border-color: #00BFFF; /* Azul vibrante */
+    box-shadow: 0 0 10px #00BFFF;
+}
+
+body.tema-dia .card-flip-back { /* O verso do card de poder no dia */
+    background-color: rgba(135, 206, 235, 0.9); /* Azul celeste */
+    border-color: #4682B4; /* Azul mais forte */
+    box-shadow: 0 0 15px #4682B4;
+    color: #000; /* Texto do elogio em preto no dia */
 }
 
 body.tema-dia button {
     background-color: #00BFFF;
     color: white;
 }
+body.tema-dia button:hover {
+    box-shadow: 0 0 10px #4682B4;
+}
 
-/* Responsividade (Para telas pequenas) */
+
+/* Responsividade para telas pequenas */
 @media (max-width: 768px) {
-    .container-cards {
+    #torre-solar h1 {
+        font-size: 2em;
+    }
+    .lenda-card, .misterio-card {
+        width: 95%;
+        margin: 10px auto;
+    }
+    .cards-poderes-wrapper {
         flex-direction: column;
         align-items: center;
+        gap: 15px; /* Reduz o espaço entre os cards em coluna */
     }
-
-    .card {
-        margin: 10px 0;
+    .card-flip-container {
+        width: 95%; /* Ocupa quase toda a largura disponível */
+        height: 350px; /* Ajuste a altura se o conteúdo for menor */
+    }
+    .card-flip-front, .card-flip-back {
+        padding: 20px;
+    }
+    #nome-input {
         width: 90%;
     }
 }
