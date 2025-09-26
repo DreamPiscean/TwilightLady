@@ -1,0 +1,185 @@
+/* Importação das fontes */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lora:ital@0;1&display=swap');
+
+/* Regras Comuns (Aplicadas em todos os temas) */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    font-family: 'Lora', serif; /* Fonte para textos longos */
+    transition: background 2s ease-in-out, color 1.5s ease; /* Suaviza a mudança de tema */
+}
+
+h1, h2, h3 {
+    font-family: 'Cinzel', serif; /* Fonte épica para títulos */
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.narrativa-admirador {
+    font-style: italic;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Container de Cards */
+.container-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Estilo do Card Básico */
+.card {
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px;
+    flex: 1 1 300px; /* Flexbox: Cresce e diminui, com base mínima de 300px */
+    min-height: 300px;
+    transition: all 1s ease; /* Transição para o card também mudar suavemente */
+}
+
+/* Estilo para os Itens de Poder Clicáveis */
+.poder-item {
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    overflow: hidden;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.poder-item:hover {
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5); /* Efeito de brilho ao passar o mouse */
+}
+
+/* Estilo para a revelação suave do Elogio Secreto */
+.elogio-secreto {
+    max-height: 0;
+    opacity: 0;
+    padding-top: 0;
+    color: gold; /* Cor especial para o segredo */
+    transition: max-height 0.8s ease-out, opacity 0.8s ease-out, padding-top 0.8s ease-out;
+}
+
+/* Classe adicionada pelo JS para revelar */
+.elogio-secreto.revelado {
+    max-height: 200px; 
+    opacity: 1;
+    padding-top: 10px;
+}
+
+/* Campo Secreto e Botão */
+.campo-secreto {
+    text-align: center;
+    padding: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+#nome-input {
+    padding: 10px;
+    margin: 10px 0;
+    width: 80%;
+    max-width: 300px;
+    border-radius: 5px;
+    border: none;
+}
+
+button {
+    padding: 10px 20px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+#mensagem-final {
+    margin-top: 15px;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+footer {
+    text-align: center;
+    padding: 10px;
+    font-size: 0.8em;
+    opacity: 0.7;
+}
+
+/* --- TEMA 1: NOITE (Padrão e Escuro) --- */
+/* (Este é o tema que será aplicado das 19h às 05h59) */
+body.tema-noite {
+    background: linear-gradient(to bottom, #000000, #191970);
+    color: #E0FFFF; /* Brilho da lua */
+}
+
+body.tema-noite .card {
+    background-color: rgba(0, 0, 0, 0.8);
+    border: 1px solid #7B68EE; /* Azul Violeta Místico */
+    box-shadow: 0 0 15px #7B68EE;
+}
+
+body.tema-noite button {
+    background-color: #7B68EE;
+    color: white;
+}
+
+/* --- TEMA 2: PÔR DO SOL --- */
+/* (Aplicado das 17h às 18h59) */
+body.tema-por-do-sol {
+    background: linear-gradient(to bottom, #FF8C00, #800080); /* Laranja forte para Roxo */
+    color: #F8F8FF;
+}
+
+body.tema-por-do-sol .card {
+    background-color: rgba(0, 0, 0, 0.7);
+    border: 1px solid gold;
+    box-shadow: 0 0 15px gold;
+}
+
+body.tema-por-do-sol button {
+    background-color: gold;
+    color: black;
+}
+
+/* --- TEMA 3: DIA --- */
+/* (Aplicado das 06h às 16h59) */
+body.tema-dia {
+    background: linear-gradient(to top, #87CEEB, #FFFFFF); /* Céu claro */
+    color: #333333;
+}
+
+body.tema-dia .card {
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 1px solid #00BFFF; /* Azul vibrante */
+    box-shadow: 0 0 10px #00BFFF;
+}
+
+body.tema-dia h1, body.tema-dia h2, body.tema-dia h3 {
+    color: #0056b3; /* Títulos escuros */
+}
+
+body.tema-dia button {
+    background-color: #00BFFF;
+    color: white;
+}
+
+/* Responsividade (Para telas pequenas) */
+@media (max-width: 768px) {
+    .container-cards {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card {
+        margin: 10px 0;
+        width: 90%;
+    }
+}
